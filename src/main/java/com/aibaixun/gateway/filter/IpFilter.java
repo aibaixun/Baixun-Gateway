@@ -1,7 +1,7 @@
-package com.baoan.gateway.filter;
+package com.aibaixun.gateway.filter;
 
-import com.baoan.gateway.propertry.IpLimitProperties;
-import com.baoan.gateway.util.ResponseUtil;
+import com.aibaixun.gateway.propertry.IpLimitProperties;
+import com.aibaixun.gateway.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

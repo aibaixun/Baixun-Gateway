@@ -1,10 +1,10 @@
-package com.baoan.gateway.filter;
+package com.aibaixun.gateway.filter;
 
 import com.aibaixun.basic.jwt.JwtUtil;
 import com.aibaixun.basic.util.IDUtils;
 import com.aibaixun.basic.util.StringUtil;
-import com.baoan.gateway.propertry.TokenProperties;
-import com.baoan.gateway.util.ResponseUtil;
+import com.aibaixun.gateway.propertry.TokenProperties;
+import com.aibaixun.gateway.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;

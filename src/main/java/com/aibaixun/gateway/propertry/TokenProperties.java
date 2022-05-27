@@ -1,4 +1,4 @@
-package com.baoan.gateway.propertry;
+package com.aibaixun.gateway.propertry;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

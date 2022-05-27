@@ -1,4 +1,4 @@
-package com.baoan.gateway.exception;
+package com.aibaixun.gateway.exception;
 
 import com.aibaixun.basic.result.BaseResultCode;
 import com.aibaixun.basic.result.JsonResult;

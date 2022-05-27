@@ -1,6 +1,6 @@
-package com.baoan.gateway.filter;
+package com.aibaixun.gateway.filter;
 
-import com.baoan.gateway.propertry.AuthProperties;
+import com.aibaixun.gateway.propertry.AuthProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

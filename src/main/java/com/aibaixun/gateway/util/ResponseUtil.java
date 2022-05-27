@@ -1,4 +1,4 @@
-package com.baoan.gateway.util;
+package com.aibaixun.gateway.util;
 
 import com.aibaixun.basic.result.BaseResultCode;
 import com.aibaixun.basic.result.JsonResult;

@@ -1,4 +1,4 @@
-package com.baoan.gateway.handler;
+package com.aibaixun.gateway.handler;
 
 import com.aibaixun.basic.result.JsonResult;
 import org.slf4j.Logger;
