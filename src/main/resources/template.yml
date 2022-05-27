@@ -1,0 +1,66 @@
+spring:
+  application:
+    name: gateway
+  redis:
+    cluster:
+      nodes: 172.16.9.2:6379,172.16.9.3:6379,172.16.9.3:6379
+  cloud:
+    gateway:
+      globalcors:
+        # 跨域配置
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+      routes:
+        - id: good
+          uri: lb://good
+          predicates:
+            - Path= /good/**
+          filters:
+            - name: GatewayRequestRateLimiter
+              args:
+                # 令牌桶每秒填充平均速率, 允许用户每秒处理多少个请求。
+                redis-rate-limiter.replenishRate: 1
+                # 令牌桶的容量，允许在1s内完成的最大请求数。
+                redis-rate-limiter.burstCapacity: 1
+                # 使用SpEL表达式从Spring容器中获取Bean对象, 查看RateLimiteConfig实现类中的方法名
+                key-resolver: "#{@ipKeyResolver}"
+                #key-resolver: "#{@ipKeyResolver}"
+                #key-resolver: "#{@userKeyResolver}"
+            - name: Hystrix
+              args:
+                name: fallbackcmd
+                fallbackUri: forward:/fallback
+    #            - name: Retry
+    #              args:
+    #                retries: 3 # 重试3ci
+    #                series: SERVER_ERROR # 500 开头
+    nacos:
+      discovery:
+        server-addr: 172.16.8.5:8848
+        namespace: dev
+        group: dev
+server:
+  port: 8080
+
+
+gateway:
+  ip:
+    limits:
+      - 127.0.0.2
+  token:
+    # 网关鉴权token 开关
+    enable: true
+    # 忽略的url
+    ignoreUrl:
+      - /cata/
+
+  auth:
+    enable: true
+    ignore-url:
+      - /a/**
