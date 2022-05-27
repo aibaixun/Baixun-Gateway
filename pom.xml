@@ -107,7 +107,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.3.7.RELEASE</version>
                 <configuration>
-                    <mainClass>com.baoan.gateway.GatewayApplication</mainClass>
+                    <mainClass>com.aibaixun.gateway.GatewayApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
