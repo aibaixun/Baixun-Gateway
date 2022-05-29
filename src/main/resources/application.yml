@@ -64,3 +64,13 @@ gateway:
     enable: true
     ignore-url:
       - /a/**
+feign:
+  hystrix:
+    enabled: true
+  compression:
+    request:
+      enabled: true #默认不开启
+      mime-types: text/html,application/xml,application/json # 设置压缩的数据类型，此处也是默认值
+      min-request-size: 2048 # 设置触发压缩的大小下限，此处也是默认值
+    response:
+      enabled: true

@@ -23,6 +23,7 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
     private final Logger logger = LoggerFactory.getLogger(AuthenticationFilter.class);
     private AuthProperties authProperties;
 
+
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         if (!authProperties.getEnable()) {
