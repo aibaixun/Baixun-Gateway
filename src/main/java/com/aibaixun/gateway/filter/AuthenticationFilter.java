@@ -1,6 +1,7 @@
 package com.aibaixun.gateway.filter;
 
 import com.aibaixun.gateway.propertry.AuthProperties;
+import com.aibaixun.gateway.service.AuthFeignClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
     private final Logger logger = LoggerFactory.getLogger(AuthenticationFilter.class);
     private AuthProperties authProperties;
 
+    private AuthFeignClient authFeignClient;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -48,6 +50,12 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
     public void setAuthProperties(AuthProperties authProperties) {
         this.authProperties = authProperties;
     }
+
+    @Autowired
+    public void setAuthFeignClient(AuthFeignClient authFeignClient) {
+        this.authFeignClient = authFeignClient;
+    }
+
     private boolean ignore(String path) {
         return authProperties.getIgnoreUrl().stream()
                 .map(url -> url.replace("/**", ""))
