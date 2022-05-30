@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+    nacos:
+      discovery:
+        server-addr: 172.16.8.5:8848
+        namespace: dev
+        group: dev
+      config:
+        server-addr:  172.16.8.5:8848
+        namespace: dev
+        file-extension: YAML
+server:
+  port: 8080
+
+feign:
+  hystrix:
+    enabled: true
+  compression:
+    request:
+      enabled: true
+      mime-types: text/html,application/xml,application/json
+      min-request-size: 2048
+    response:
+      enabled: true
+      mime-types: text/html,application/xml,application/json
+      min-request-size: 2048

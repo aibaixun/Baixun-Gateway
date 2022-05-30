@@ -1,6 +1,7 @@
 package com.aibaixun.gateway.propertry;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
@@ -11,6 +12,7 @@ import java.util.Set;
  * @date 2022/5/27
  */
 @Component
+@RefreshScope
 @ConfigurationProperties(prefix = "gateway.ip")
 public class IpLimitProperties {
     private Set<String> limits;

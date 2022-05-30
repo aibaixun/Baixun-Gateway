@@ -1,20 +1,21 @@
 package com.aibaixun.gateway.propertry;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author wang xiao
  * @date 2022/5/27
  */
 @Component
+@RefreshScope
 @ConfigurationProperties(prefix = "gateway.auth")
 public class AuthProperties {
 
-    private List<String> ignoreUrl = new ArrayList<>();
+    private Set<String> ignoreUrl = new HashSet<>();
 
     private Boolean enable = false;
 
@@ -39,11 +40,14 @@ public class AuthProperties {
     };
 
 
-    public List<String> getIgnoreUrl() {
+
+
+    public Set<String> getIgnoreUrl() {
+        ignoreUrl.addAll(Arrays.asList(ENDPOINTS));
         return ignoreUrl;
     }
 
-    public void setIgnoreUrl(List<String> ignoreUrl) {
+    public void setIgnoreUrl(Set<String> ignoreUrl) {
         this.ignoreUrl = ignoreUrl;
     }
 

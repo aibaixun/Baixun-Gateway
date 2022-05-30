@@ -1,8 +1,6 @@
 package com.aibaixun.gateway.config;
 
 import feign.Request;
-import feign.RequestInterceptor;
-import feign.RequestTemplate;
 import feign.codec.Decoder;
 import feign.codec.Encoder;
 import feign.optionals.OptionalDecoder;
@@ -14,8 +12,6 @@ import org.springframework.cloud.openfeign.support.SpringEncoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
  * @author wang xiao
