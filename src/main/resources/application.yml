@@ -40,6 +40,10 @@ spring:
 #              args:
 #                retries: 3 # 重试3ci
 #                series: SERVER_ERROR # 500 开头
+        - id: uaa
+          uri: lb://uaa
+          predicates:
+            - Path= /uaa/**
     nacos:
       discovery:
         server-addr: 172.16.8.5:8848
@@ -61,7 +65,7 @@ gateway:
       - /cata/
 
   auth:
-    enable: true
+    enable: false
     ignore-url:
       - /a/**
 feign:

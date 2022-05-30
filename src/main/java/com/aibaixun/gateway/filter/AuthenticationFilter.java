@@ -1,7 +1,10 @@
 package com.aibaixun.gateway.filter;
 
+import com.aibaixun.basic.jwt.JwtUtil;
 import com.aibaixun.gateway.propertry.AuthProperties;
 import com.aibaixun.gateway.service.AuthFeignClient;
+import com.aibaixun.gateway.service.PermissionService;
+import com.aibaixun.gateway.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +27,7 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
     private final Logger logger = LoggerFactory.getLogger(AuthenticationFilter.class);
     private AuthProperties authProperties;
 
-    private AuthFeignClient authFeignClient;
+    private PermissionService permissionService;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -37,6 +40,12 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
         if (ignore(path) || ignore(requestUrl)) {
             logger.info("AuthenticationFilter request :{} path:{} or url:{} is ignore",request.getId(),path,requestUrl);
             return chain.filter(exchange);
+        }
+        String userid = request.getHeaders().getFirst(JwtUtil.DEFAULT_USER_ID);
+        String methodValue = request.getMethodValue();
+        boolean hasPermission = permissionService.hasPermission(userid, path, methodValue);
+        if (!hasPermission){
+            ResponseUtil.noAuth(exchange.getResponse());
         }
         return chain.filter(exchange);
     }
@@ -52,8 +61,8 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
     }
 
     @Autowired
-    public void setAuthFeignClient(AuthFeignClient authFeignClient) {
-        this.authFeignClient = authFeignClient;
+    public void setPermissionService(PermissionService permissionService) {
+        this.permissionService = permissionService;
     }
 
     private boolean ignore(String path) {

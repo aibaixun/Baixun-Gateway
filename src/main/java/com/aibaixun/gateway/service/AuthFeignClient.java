@@ -1,25 +1,29 @@
 package com.aibaixun.gateway.service;
 
 import com.aibaixun.basic.result.JsonResult;
-import com.aibaixun.gateway.service.follback.AuthClientFallback;
+import com.aibaixun.gateway.service.fallback.AuthFeignClientFallback;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.HttpMethod;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author wang xiao
- * @date 2022/5/29
+ * @date 2022/5/30
  */
-@FeignClient(name = "uaa",path = "/uaa",fallback = AuthClientFallback.class)
+
+@Component
+@FeignClient(value = "uaa",decode404 = true,path = "/uaa",fallback = AuthFeignClientFallback.class)
 public interface AuthFeignClient {
+
     /**
-     * 检测用户时候具备访问改地址方法
-     * @param userid id
-     * @param requestPath 请求地址
+     * uid是否具备权限 访问url
+     * @param userid 用户id
+     * @param requestPath 请求url
      * @param method 方法
-     * @return jsonResult
+     * @return boolean
      */
     @GetMapping("/auth")
-    JsonResult<Boolean> checkPath(@RequestParam String userid, @RequestParam String requestPath, @RequestParam HttpMethod method);
+    JsonResult<Boolean> checkPath(@RequestParam("userid") String userid, @RequestParam("requestPath") String requestPath, @RequestParam("method") String method);
+
 }
