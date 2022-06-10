@@ -23,4 +23,8 @@ public class FollBackController {
         logger.error("FollBackController append fallback,route is:{}",route);
         return JsonResult.failed("下游服务调用失败,正在熔断!请稍后在尝试");
     }
+
+
+
+
 }

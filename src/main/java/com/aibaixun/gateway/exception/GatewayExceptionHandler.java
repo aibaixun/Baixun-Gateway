@@ -26,7 +26,6 @@ import reactor.core.publisher.Mono;
  */
 @Component
 @Order(-2)
-
 public class GatewayExceptionHandler extends AbstractErrorWebExceptionHandler {
 
     private static final Logger log = LoggerFactory.getLogger(GatewayExceptionHandler.class);
@@ -51,7 +50,5 @@ public class GatewayExceptionHandler extends AbstractErrorWebExceptionHandler {
         BodyInserter<JsonResult<String>, ReactiveHttpOutputMessage> result = BodyInserters.fromValue(jsonResult);
         return ServerResponse.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(result);
     }
-
-
 
 }
