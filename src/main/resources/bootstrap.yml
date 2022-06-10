@@ -36,8 +36,7 @@ feign:
       enabled: true
       mime-types: text/html,application/xml,application/json
       min-request-size: 2048
-  management.endpoint.gateway.enabled=true # default value
-  management.endpoints.web.exposure.include=gateway
+
 
 management:
   endpoint:
