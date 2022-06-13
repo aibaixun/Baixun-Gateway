@@ -1,5 +1,6 @@
 package com.aibaixun.gateway.filter;
 
+import com.aibaixun.basic.jwt.JwtUtil;
 import com.aibaixun.gateway.propertry.IpLimitProperties;
 import com.aibaixun.gateway.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -30,7 +31,6 @@ public class IpFilter implements GlobalFilter, Ordered {
 
     private final Logger logger = LoggerFactory.getLogger(IpFilter.class);
     private IpLimitProperties ipLimitProperties;
-    private static final String X_REAL_IP ="X-Real-IP";
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -44,7 +44,7 @@ public class IpFilter implements GlobalFilter, Ordered {
             return ResponseUtil.ipLimited(response);
         }
         ServerHttpRequest.Builder requestBuilder = request.mutate();
-        requestBuilder.header(X_REAL_IP, ip);
+        requestBuilder.header(JwtUtil.X_REAL_IP, ip);
         return chain.filter(exchange);
     }
 
