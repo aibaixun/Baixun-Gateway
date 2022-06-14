@@ -5,6 +5,7 @@ import com.aibaixun.gateway.propertry.AuthProperties;
 import com.aibaixun.gateway.service.AuthFeignClient;
 import com.aibaixun.gateway.service.PermissionService;
 import com.aibaixun.gateway.util.ResponseUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,9 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
         }
         String userid = request.getHeaders().getFirst(JwtUtil.DEFAULT_USER_ID);
         String methodValue = request.getMethodValue();
+        if (StringUtils.isEmpty(userid)){
+            return ResponseUtil.noAuth(exchange.getResponse());
+        }
         boolean hasPermission = permissionService.hasPermission(userid, path, methodValue);
         if (!hasPermission){
            return ResponseUtil.noAuth(exchange.getResponse());
