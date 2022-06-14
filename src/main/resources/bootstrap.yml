@@ -37,7 +37,11 @@ feign:
       mime-types: text/html,application/xml,application/json
       min-request-size: 2048
 
-
+  client:
+    config:
+      default:
+        ConnectTimeOut: 10000
+        ReadTimeOut: 10000
 management:
   endpoint:
     gateway:

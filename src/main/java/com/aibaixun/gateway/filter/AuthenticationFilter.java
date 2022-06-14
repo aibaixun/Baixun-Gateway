@@ -45,7 +45,7 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
         String methodValue = request.getMethodValue();
         boolean hasPermission = permissionService.hasPermission(userid, path, methodValue);
         if (!hasPermission){
-            ResponseUtil.noAuth(exchange.getResponse());
+           return ResponseUtil.noAuth(exchange.getResponse());
         }
         return chain.filter(exchange);
     }

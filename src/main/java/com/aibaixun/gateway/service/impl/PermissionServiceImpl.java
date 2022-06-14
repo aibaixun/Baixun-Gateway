@@ -6,11 +6,6 @@ import com.aibaixun.gateway.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-
 /**
  * @author wang xiao
  * @date 2022/5/30
@@ -25,14 +20,9 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     public boolean hasPermission(String uid, String url, String method)  {
-        CompletableFuture<JsonResult<Boolean>> completableFuture = CompletableFuture.supplyAsync(() -> this.authFeignClient.checkPath(uid, url, method));
-        try {
-            JsonResult<Boolean> booleanJsonResult = completableFuture.get(6, TimeUnit.SECONDS);
-            if (JsonResult.isSuccess(booleanJsonResult)){
-                return booleanJsonResult.getData();
-            }
-        }catch (ExecutionException |InterruptedException | TimeoutException e){
-            return false;
+        JsonResult<Boolean> booleanJsonResult1 = authFeignClient.checkPath(uid, url, method);
+        if (JsonResult.isSuccess(booleanJsonResult1)){
+            return booleanJsonResult1.getData();
         }
         return false;
     }

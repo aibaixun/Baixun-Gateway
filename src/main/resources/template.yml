@@ -62,12 +62,12 @@ gateway:
     enable: true
     # 忽略的url
     ignoreUrl:
-      - /cata/
+      - /uaa/auth/**
 
   auth:
     enable: false
     ignore-url:
-      - /a/**
+      - /uaa/auth/**
 feign:
   hystrix:
     enabled: true

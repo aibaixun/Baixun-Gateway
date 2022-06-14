@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 
 @Component
-@FeignClient(value = "uaa",decode404 = true,path = "/uaa",fallback = AuthFeignClientFallback.class)
+@FeignClient(value = "uaa",fallback = AuthFeignClientFallback.class)
 public interface AuthFeignClient {
 
     /**
@@ -23,7 +23,7 @@ public interface AuthFeignClient {
      * @param method 方法
      * @return boolean
      */
-    @GetMapping("/auth")
+    @GetMapping("uaa/auth/check")
     JsonResult<Boolean> checkPath(@RequestParam("userid") String userid, @RequestParam("requestPath") String requestPath, @RequestParam("method") String method);
 
 }
